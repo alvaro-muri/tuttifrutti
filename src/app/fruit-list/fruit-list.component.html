@@ -1,0 +1,30 @@
+<h1>Fruit List</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Fruit</th>
+      <th>Country</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Image</th>
+      <th>Qunatity</th>
+      <th>Purchase</th>
+    </tr>
+  </thead>
+  <thead>
+    <tr *ngFor="let fruit of fruits" class="regular" [ngClass]="{'clearance':fruit.clearance}" >
+      <td>{{fruit.name| uppercase}}</td>
+      <td>{{fruit.country}}</td>
+      <td>{{fruit.price|currency}}</td>
+      <td><span class="badge badge-dark" *ngIf="fruit.stock==0">SIN STOCK</span></td>
+      <td><img class="imagen" src="{{fruit.image}}" alt="{{fruit.name}}"/></td>
+      <td class="input-group">
+        <app-input-integer [(quantity)]="fruit.quantity" [max]="fruit.stock" (maxReached)="maxReached($event)" *ngIf="fruit.stock"></app-input-integer>
+      </td>
+      <td>
+        <button class="btn btn-primary" type="button" name="button" (click)="addToCart(fruit)">Buy</button>
+      </td>
+    </tr>
+  </thead>
+</table>
